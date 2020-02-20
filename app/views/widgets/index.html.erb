@@ -1,14 +1,27 @@
 <div class="container">
-  <h1 class="title">Widgets</h1>
+  <div style="display: flex">
+    <div>
+      <h1 class="title">Widgets</h1>
+    </div>
+    <div>
+      <%= simple_form_for :search, url: widgets_path, method: "GET", html: { class: 'form-inline' } do |f| %>
+        <%= f.input :term, label: "", input_html: {value: ""} %>
+        <%= f.submit "Search", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
   <div class="row">
-    <% @widgets&.dig("widgets").each do |widget| %>
+    <% @widgets.each do |widget| %>
     <div class="col-sm-6">
       <div class="card">
+        <div class="card-header">
+          <%= widget&.dig("name") %>
+        </div>
         <div class="card-body">
-          <h5 class="card-title">
-            <%= widget&.dig("name") %>
-          </h5>
           <p  class="card-text"> <%= widget&.dig("description") %> </p>
+        </div>
+        <div class="card-footer text-muted">
+          <%= widget.dig("user")&.dig("name") %>
         </div>
       </div>
       <br/>

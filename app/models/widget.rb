@@ -1,5 +1,5 @@
 class Widget
-  def self.all
-    @user = Resources::WidgetFactory.get
+  def self.all(term)
+    @user = Resources::WidgetFactory.get(term)
   end
 end

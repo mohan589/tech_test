@@ -1,6 +1,6 @@
 class User
   def self.create_user(params)
-    @user = Resources::UserFactory.post(payload: { :user => params })
+    @user ||= Resources::UserFactory.post(payload: { :user => params })
   end
 
   def self.current_user

@@ -1,6 +1,7 @@
 class Resources::WidgetFactory < Resources::Factory
-  def self.get
+  def self.get(term)
     url = self.path + "/widgets/visible?" + "client_id=" + CLIENT_ID + "&client_secret=" + CLIENT_SECRET
+    url = self.path + "/widgets/visible?" + "client_id=" + CLIENT_ID + "&client_secret=" + CLIENT_SECRET + "&term=" + term if term.present?
 
     result = RestClient.get(url, headers= {"Authorization" => self.token })
     self.handle_response(result)
