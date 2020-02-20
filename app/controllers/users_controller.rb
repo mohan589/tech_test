@@ -3,7 +3,7 @@ class UsersController < ApplicationController
     @user = User.create_user(user_params)
 
     if @user.present?
-      redirected_to widgets_path
+      redirect_to widgets_path
     else
       render 'new'
     end

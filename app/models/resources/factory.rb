@@ -40,8 +40,6 @@ class Resources::Factory
   end
 
   def self.handle_response(res)
-    JSON.parse(res.dig("data"))
+    JSON.parse(res).dig("data")
   end
-
-  attr_accessor :access_token, :payload, :token_type, :refresh_token, :email
 end
