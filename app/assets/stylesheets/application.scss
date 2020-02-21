@@ -23,9 +23,10 @@
  .main { 
   display: flex; 
   justify-content: space-between;
+  padding: 10px 0 10px 0;
 }
 
-.form-control, .card, .btn, .modal-content {
+.form-control, .card, .btn, .modal-content, .card-header:first-child {
   border-radius: 0;
 }
 
