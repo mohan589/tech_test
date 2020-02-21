@@ -42,13 +42,18 @@ group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
-  %w[rspec-core rspec-expectations rspec-mocks rspec-rails rspec-support].each do |lib|
-        gem lib, git: "https://github.com/rspec/#{lib}.git", branch: 'master' # Previously '4-0-dev' or '4-0-maintenance' branch
-    end
-  gem 'factory_bot_rails'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+end
+
+group :development, :test do
+  %w[rspec-core rspec-expectations rspec-mocks rspec-rails rspec-support].each do |lib|
+        gem lib, git: "https://github.com/rspec/#{lib}.git", branch: 'master' # Previously '4-0-dev' or '4-0-maintenance' branch
+    end
+  gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
+  gem 'factory_bot_rails'
+  gem 'database_cleaner'
 end
 
 group :test do
@@ -57,8 +62,6 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
-  gem 'database_cleaner'
-    gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
