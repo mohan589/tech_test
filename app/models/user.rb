@@ -1,6 +1,4 @@
 class User
-  extend Authorization
-
   def self.create_user(params)
     @user ||= Resources::UserFactory.post(payload: { :user => params })
   end
