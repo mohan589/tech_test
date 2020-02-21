@@ -8,20 +8,36 @@ class Resources::Factory
   CLIENT_ID = "277ef29692f9a70d511415dc60592daf4cf2c6f6552d3e1b769924b2f2e2e6fe".freeze
   CLIENT_SECRET = "d6106f26e8ff5b749a606a1fba557f44eb3dca8f48596847770beb9b643ea352".freeze
 
-  def self.get(url:)
-    result = RestClient.get(url, headers= {"Authorization" => self.token })
-    self.handle_response(result)
+  def self.get(url:, headers:)
+    begin
+      result = RestClient.get(url, headers= headers)
+      self.handle_response(result)
+    rescue RestClient::Unauthorized, RestClient::Forbidden => err
+      return err.response
+    rescue RestClient::ImATeapot => err
+      return err.response
+    rescue KeyError => e
+      raise_configuration_error(
+        missing_env: "config error",
+        error: e
+      )
+    end
   end
 
-  def self.post(url: nil, payload:)
-    @payload = payload
-    result = RestClient.post(url, self.input.to_json, headers= HEADERS)
-    result
-  rescue KeyError => e
-    raise_configuration_error(
-      missing_env: "config error",
-      error: e
-    )
+  def self.post(url:, payload:, headers:)
+    begin
+      result = RestClient.post(url, payload, headers= headers)
+      self.handle_response(result)
+    rescue RestClient::Unauthorized, RestClient::Forbidden => err
+      return err.response
+    rescue RestClient::ImATeapot => err
+      return err.response
+    rescue KeyError => e
+      raise_configuration_error(
+        missing_env: "config error",
+        error: e
+      )
+    end
   end
 
   def self.path

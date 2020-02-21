@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :users
   resources :widgets
   get '/my_widgets', to: 'widgets#my_widgets'
+  get '/revoke_user', to: 'users#revoke_user'
 
   root to: "widgets#index"
 end

@@ -1,7 +1,7 @@
 <div class="container top">
   <div class="main">
     <div>
-      <h1 class="title">Widgets</h1>
+      <h3 class="title">Widgets</h3>
     </div>
     <div>
       <%= simple_form_for :search, url: widgets_path, method: "GET", html: { class: 'form-inline' } do |f| %>
@@ -9,7 +9,6 @@
         <%= f.submit "Search", class: "btn btn-primary" %>
       <% end %>
     </div>
-
     <div>
       <%= link_to "All", widgets_path, class: "btn btn-primary" %>
       <% if current_user.present? %>

@@ -6,7 +6,7 @@ class WidgetsController < ApplicationController
 
   def create
     @widget = Widget.create_widget(widget_params)
-    byebug
+
     if @widget.present?
       redirect_to widgets_path
     else

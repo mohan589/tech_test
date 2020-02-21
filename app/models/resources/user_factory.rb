@@ -1,20 +1,15 @@
 class Resources::UserFactory < Resources::Factory
-  def self.post(url: nil, payload:)
+  def self.post(url: nil, payload:, headers: nil)
     url = path + "/users" if url.nil?
     @payload = payload
 
-    begin
-      result = RestClient.post(url, input.to_json, headers= HEADERS)
-      self.handle_response(result)
-    rescue RestClient::Unauthorized, RestClient::Forbidden => err
-      return err.response
-    rescue RestClient::ImATeapot => err
-      return err.response
-    rescue KeyError => e
-      raise_configuration_error(
-        missing_env: "config error",
-        error: e
-      )
-    end
+    super(url: url, payload: input.to_json, headers: headers || HEADERS)
+  end
+
+  def self.revoke_user
+    url = DOMAIN + "/oauth/revoke"
+    headers= { "Authorization" => self.token }.merge!(HEADERS)
+
+    self.post(url: url, payload: { token: self.access_token.dig("access_token") }, headers: headers)
   end
 end
