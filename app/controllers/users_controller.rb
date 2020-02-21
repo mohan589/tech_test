@@ -14,7 +14,8 @@ class UsersController < ApplicationController
   end
 
   def revoke_user
-    @user = User.revoke_user
+    User.revoke_user
+    current_user = nil
     redirect_to root_path
   end
 

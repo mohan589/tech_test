@@ -13,4 +13,3 @@ class Widget
 
   attr_accessor :name, :description, :kind
 end
-# http://ab.com/a.png

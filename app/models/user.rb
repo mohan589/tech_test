@@ -12,8 +12,8 @@ class User
   end
 
   def self.revoke_user
-    @user = Resources::UserFactory.revoke_user
-    current_user = nil
+    Resources::UserFactory.revoke_user if User.current_user.present?
+    @user = nil
   end
 
   attr_accessor :first_name, :last_name, :email, :password, :image_url, :access_token, :payload, :token_type, :refresh_token, :email
