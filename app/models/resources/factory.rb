@@ -1,5 +1,3 @@
-require 'rest-client'
-
 class Resources::Factory
   DOMAIN = "https://showoff-rails-react-production.herokuapp.com/".freeze
   HEADERS = { "Content-Type" => "application/json" }

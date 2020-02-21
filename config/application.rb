@@ -6,6 +6,7 @@ require "sprockets/railtie"
 require "rails/test_unit/railtie"
 require "action_cable"
 require 'active_support'
+require 'rest-client'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
