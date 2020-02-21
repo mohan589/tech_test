@@ -9,7 +9,8 @@ class Resources::Factory
   CLIENT_SECRET = "d6106f26e8ff5b749a606a1fba557f44eb3dca8f48596847770beb9b643ea352".freeze
 
   def self.get(url:)
-    RestClient.get(url, headers={})
+    result = RestClient.get(url, headers= {"Authorization" => self.token })
+    self.handle_response(result)
   end
 
   def self.post(url: nil, payload:)
@@ -41,5 +42,13 @@ class Resources::Factory
 
   def self.handle_response(res)
     JSON.parse(res).dig("data")
+  end
+
+  def self.access_token
+    User&.current_token
+  end
+
+  def self.token
+    self.access_token&.dig("token_type") + ' ' + self.access_token&.dig("access_token") unless self.access_token.nil?
   end
 end
