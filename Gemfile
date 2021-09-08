@@ -26,7 +26,7 @@ gem 'http-cookie'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 gem "binding_of_caller"
-gem 'better_errors', '2.5.1'
+gem 'better_errors', '2.8.0'
 gem 'bootstrap', '~> 4.4.1'
 gem 'simple_form', '5.0.1'
 gem "font-awesome-rails"
